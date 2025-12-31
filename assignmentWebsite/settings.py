@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9i=efq)^f$51dxl!v0vw1l(lkv(^$(70mnlz=*uot#7+&&ie#&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "0") == "1"
-DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+DEBUG = False
+
+ALLOWED_HOSTS = ["janZ1234123.pythonanywhere.com"]
 
 
 # Application definition
@@ -148,10 +148,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    }
-}
