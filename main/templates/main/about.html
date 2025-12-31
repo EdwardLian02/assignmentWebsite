@@ -1,0 +1,434 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/about-style.css' %}">{% endblock extra_css %}
+
+{% block extra_js %}<script src="{% static 'js/about-script.js' %}"></script>{% endblock extra_js %}
+
+{% block content %}
+ <!-- About Hero -->
+ <section class="about-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="page-badge fade-in-up">OUR STORY</div>
+                <h1 class="hero-title fade-in-up">Where Vision Meets Precision</h1>
+                <p class="hero-description fade-in-up">
+                    At AI-Solution, we believe extraordinary software shouldn't be reserved for 
+                    Silicon Valley giants. We're on a mission to bring elite, scalable, and 
+                    beautiful digital solutions to ambitious enterprises worldwide.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <!-- Animated floating element (could be an image or abstract graphic) -->
+                <div class="text-center" data-aos="fade-left" data-aos-delay="300">
+                    <div class="d-inline-block position-relative">
+                        <div class="rounded-circle bg-teal" style="width: 300px; height: 300px; background: radial-gradient(circle, rgba(20, 184, 166, 0.2) 0%, transparent 70%); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                        <div class="rounded-circle" style="width: 200px; height: 200px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative;">
+                            <i class="fas fa-cube fa-4x" style="color: rgba(255, 255, 255, 0.9);"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Vision -->
+<section id="mission-vision">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="mission-card stagger-item" data-aos="fade-up">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p class="lead-text mb-4">
+                        To empower enterprises with software that not only solves complex challenges 
+                        but elevates their entire digital ecosystem through intuitive design, 
+                        scalable architecture, and relentless attention to detail.
+                    </p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="me-3">
+                            <i class="fas fa-check-circle fa-2x" style="color: var(--teal-primary);"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0" style="font-size: 1rem;">Every solution is crafted with the user experience at its core</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="vision-card stagger-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="vision-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p class="lead-text mb-4">
+                        To become the most trusted partner for enterprises seeking digital 
+                        transformation—where every interaction feels effortless, every system 
+                        performs flawlessly, and every innovation drives measurable business impact.
+                    </p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="me-3">
+                            <i class="fas fa-rocket fa-2x" style="color: var(--teal-primary);"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0" style="font-size: 1rem;">Pioneering the next generation of enterprise software</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brand Story -->
+<section class="brand-story-section">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4 fade-in-up">A Journey of Innovation</h2>
+                <p class="lead-text fade-in-up">
+                    From a small team of passionate engineers to a global leader in enterprise software, 
+                    our story is one of relentless pursuit of excellence.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="story-image-container stagger-item" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI-Solution Team Collaboration" class="story-image">
+                    <div class="story-image-overlay">
+                        <div class="year-badge">2018</div>
+                        <h4 class="text-white mb-0">The Beginning</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="ps-lg-5">
+                    <h3 class="mb-4 fade-in-up">Born from a Simple Idea</h3>
+                    <p class="mb-4 fade-in-up">
+                        AI-Solution was founded in 2018 by a group of engineers who were tired of 
+                        seeing enterprise software that was powerful but painful to use. We believed 
+                        there had to be a better way—software that combined enterprise-grade 
+                        robustness with consumer-grade elegance.
+                    </p>
+                    <p class="mb-4 fade-in-up">
+                        Starting with just three clients in the fintech space, we proved that our 
+                        approach worked. By focusing on intuitive user experiences alongside scalable 
+                        architecture, we delivered solutions that employees actually enjoyed using.
+                    </p>
+                    <div class="row mt-5">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h3 class="display-4 fw-bold text-teal mb-0">3</h3>
+                                <p class="text-muted">Founding Members</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h3 class="display-4 fw-bold text-teal mb-0">45+</h3>
+                                <p class="text-muted">Team Members Today</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4 fade-in-up">Our Core Values</h2>
+                <p class="lead-text fade-in-up">
+                    These principles guide every decision we make, from hiring to product development 
+                    to client partnerships.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card stagger-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="value-number">01</div>
+                    <div class="value-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h4>Excellence in Execution</h4>
+                    <p>We don't just meet requirements—we exceed expectations through meticulous attention to detail.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card stagger-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-number">02</div>
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Innovation by Design</h4>
+                    <p>We challenge assumptions and explore new approaches to solve complex problems.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card stagger-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-number">03</div>
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Partnership Mindset</h4>
+                    <p>We view every client relationship as a long-term partnership built on trust and transparency.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card stagger-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-number">04</div>
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Human-Centered Focus</h4>
+                    <p>Everything we build prioritizes the people who will use it—their needs, their workflows, their success.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4 fade-in-up">Meet Our Leadership</h2>
+                <p class="lead-text fade-in-up">
+                    A diverse team of visionaries, engineers, and strategists united by a passion for 
+                    building software that makes a difference.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card stagger-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="team-image-container">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Alex Chen" class="team-image">
+                        <div class="team-overlay">
+                            <p class="mb-0" style="font-size: 0.875rem; color: white">"Great software should feel intuitive, not intimidating."</p>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4 class="mb-1">Alex Chen</h4>
+                        <div class="team-role">CEO & Founder</div>
+                        <p style="font-size: 0.95rem;">Former engineering lead at Google, passionate about human-computer interaction.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card stagger-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-image-container">
+                        <img src="https://plus.unsplash.com/premium_photo-1661369552719-ce7d09f70264?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8b2ZmaWNlJTIwZ2lybHxlbnwwfHwwfHx8MA%3D%3D" alt="Maya Rodriguez" class="team-image">
+                        <div class="team-overlay">
+                            <p class="mb-0" style="font-size: 0.875rem; color: white;">"Design isn't how it looks, it's how it works."</p>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4 class="mb-1">Maya Rodriguez</h4>
+                        <div class="team-role">Chief Design Officer</div>
+                        <p style="font-size: 0.95rem; ">Ex-Apple designer focused on creating seamless, beautiful user experiences.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-dribbble"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card stagger-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-image-container">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="James Wilson" class="team-image">
+                        <div class="team-overlay">
+                            <p class="mb-0" style="font-size: 0.875rem; color: white;">"Scalability isn't an afterthought—it's the foundation."</p>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4 class="mb-1">James Wilson</h4>
+                        <div class="team-role">CTO</div>
+                        <p style="font-size: 0.95rem; ">Previously led cloud architecture at AWS, specializing in distributed systems.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card stagger-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-image-container">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sarah Johnson" class="team-image">
+                        <div class="team-overlay">
+                            <p class="mb-0" style="font-size: 0.875rem; color: white;">"The best solutions emerge from deep client understanding."</p>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4 class="mb-1">Sarah Johnson</h4>
+                        <div class="team-role">Head of Strategy</div>
+                        <p style="font-size: 0.95rem;">Former McKinsey consultant with expertise in digital transformation.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% comment %} <div class="text-center mt-5">
+            <a href="" class="btn btn-outline-success btn-lg px-5 py-3 view-member-button" >
+                View All Team Members <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div> {% endcomment %}
+    </div>
+</section>
+
+<!-- Milestones Section -->
+<section id="milestones">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4 fade-in-up">Our Journey in Numbers</h2>
+                <p class="lead-text fade-in-up">
+                    Measurable impact, sustained growth, and continuous innovation define our path forward.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="milestone-card stagger-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="milestone-number">150+</div>
+                    <div class="milestone-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4>Projects Delivered</h4>
+                    <p>Enterprise solutions across finance, healthcare, retail, and technology sectors.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="milestone-card stagger-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="milestone-number">98%</div>
+                    <div class="milestone-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Client Retention</h4>
+                    <p>Our partnerships last—clients stay with us for ongoing innovation and support.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="milestone-card stagger-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="milestone-number">45+</div>
+                    <div class="milestone-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Team Members</h4>
+                    <p>Diverse talents across engineering, design, strategy, and client success.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="milestone-card stagger-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="milestone-number">12</div>
+                    <div class="milestone-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>Industry Awards</h4>
+                    <p>Recognized for excellence in innovation, design, and business impact.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Company timeline (optional) -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="row mt-5 pt-5" style="border-top: 1px solid var(--gray-light);">
+        
+                    <div class="text-center col-6 col-md-3  mb-4">
+                        <div class="text-white rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                             style="width: 60px; height: 60px; font-weight: bold; margin-bottom: 1rem; background-color: #0d9488">
+                            2018
+                        </div>
+                        <p class="mb-0 fw-bold">Founded</p>
+                    </div>
+        
+                    <div class="text-center col-6 col-md-3  mb-4">
+                        <div class="text-white rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                             style="width: 60px; height: 60px; font-weight: bold; margin-bottom: 1rem; background-color: #0d9488">
+                            2019
+                        </div>
+                        <p class="mb-0 fw-bold">First Enterprise Client</p>
+                    </div>
+        
+                    <div class="text-center col-6 col-md-3 mb-4">
+                        <div class="text-white rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                             style="width: 60px; height: 60px; font-weight: bold; margin-bottom: 1rem; background-color: #0d9488">
+                            2022
+                        </div>
+                        <p class="mb-0 fw-bold">Series A Funding</p>
+                    </div>
+        
+                    <div class="text-center col-6 col-md-3  mb-4">
+                        <div class="text-white rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                             style="width: 60px; height: 60px; font-weight: bold; margin-bottom: 1rem; background-color: #0d9488">
+                            2025
+                        </div>
+                        <p class="mb-0 fw-bold">Global Expansion</p>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section style="background: linear-gradient(135deg, var(--deep-navy) 0%, var(--rich-blue) 100%); color: white; border-radius: var(--card-radius); margin: 0 auto 5rem; max-width: 1200px; padding: 5rem;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h2 class="mb-3">Ready to Build Something Extraordinary?</h2>
+                <p class="mb-0">Join the growing list of enterprises that trust AI-Solution with their most critical digital transformations.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg px-5 py-3" style="border-radius: 50px; font-weight: 600; transition: all 0.3s var(--transition);">
+                    Start a Conversation <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+

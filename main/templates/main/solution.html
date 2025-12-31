@@ -1,0 +1,843 @@
+
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_css %}    <link rel="stylesheet" href="{% static 'css/solution-style.css' %}">{% endblock extra_css %}
+
+{% block extra_js %}<script src="{% static 'js/solution-script.js' %}"></script>{% endblock extra_js %}
+
+
+{% block content %}
+<!-- Solution Detail Modal -->
+<div class="detail-modal" id="solutionModal">
+    <div class="modal-overlay" onclick="closeModal('solutionModal')"></div>
+    <div class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal('solutionModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-title-container">
+                <div class="modal-badge">
+                    <i class="fas fa-hospital"></i> Healthcare Solution
+                </div>
+                <div class="modal-icon-large">
+                    <i class="fas fa-hospital"></i>
+                </div>
+                <h1 class="modal-title">Intelligent Healthcare Platform</h1>
+                <p class="modal-subtitle">
+                    AI-driven patient management and diagnostic support system revolutionizing healthcare delivery.
+                </p>
+            </div>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-section">
+                <h3 class="modal-section-title">Overview</h3>
+                <p>
+                    Our Intelligent Healthcare Platform represents the future of medical care delivery. 
+                    By integrating artificial intelligence, IoT devices, and real-time analytics, we've created 
+                    a comprehensive ecosystem that enhances patient outcomes, streamlines hospital operations, 
+                    and reduces costs across the healthcare continuum.
+                </p>
+                
+                <div class="modal-stats">
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">150+</div>
+                        <div class="modal-stat-label">Hospitals Using</div>
+                    </div>
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">2.5M</div>
+                        <div class="modal-stat-label">Patients Served</div>
+                    </div>
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">40%</div>
+                        <div class="modal-stat-label">Efficiency Gain</div>
+                    </div>
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">99.9%</div>
+                        <div class="modal-stat-label">System Uptime</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Key Features</h3>
+                <div class="modal-features-grid">
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">Real-time Patient Monitoring</h4>
+                        <p class="modal-feature-desc">
+                            Continuous monitoring of vital signs with AI-powered alerts for early intervention. 
+                            Integrates with wearables and hospital equipment for seamless data collection.
+                        </p>
+                    </div>
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">Predictive Analytics for Diagnostics</h4>
+                        <p class="modal-feature-desc">
+                            Machine learning algorithms analyze patient data to predict potential health issues 
+                            before they become critical, improving early detection rates by 35%.
+                        </p>
+                    </div>
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">HIPAA Compliant Infrastructure</h4>
+                        <p class="modal-feature-desc">
+                            Enterprise-grade security with end-to-end encryption, audit trails, and compliance 
+                            monitoring ensuring complete patient data protection.
+                        </p>
+                    </div>
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">IoT Device Integration</h4>
+                        <p class="modal-feature-desc">
+                            Seamless integration with medical devices, wearables, and hospital equipment 
+                            through our proprietary IoT gateway supporting 200+ device types.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Technology Stack</h3>
+                <div class="modal-tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">TensorFlow</span>
+                    <span class="tech-badge">React</span>
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">AWS</span>
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Kubernetes</span>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Business Impact</h3>
+                <ul class="solution-features-clean">
+                    <li>Reduced patient readmission rates by 28%</li>
+                    <li>Decreased diagnostic errors by 45%</li>
+                    <li>Improved bed utilization by 32%</li>
+                    <li>Reduced administrative workload by 50%</li>
+                    <li>Increased patient satisfaction scores by 40%</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button class="modal-cta-btn" onclick="window.location.href='contact.html'">
+                Request a Demo <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Project Detail Modal -->
+<div class="detail-modal" id="projectModal">
+    <div class="modal-overlay" onclick="closeModal('projectModal')"></div>
+    <div class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal('projectModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-title-container">
+                <div class="modal-badge">
+                    <i class="fas fa-hospital"></i> Healthcare project 
+                </div>
+                <div class="modal-icon-large">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h1 class="modal-title">National Healthcare Intelligence Platform</h1>
+                <p class="modal-subtitle">
+                    A centralized healthcare management system serving 50+ hospitals, transforming patient care delivery.
+                </p>
+            </div>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-section">
+                <h3 class="modal-section-title">Project Overview</h3>
+                <p>
+                    This ambitious project involved creating a unified healthcare intelligence platform 
+                    for a national network of 50+ hospitals. The system integrates electronic health records, 
+                    telemedicine, predictive diagnostics, and operational management into a single, 
+                    cohesive platform that has revolutionized healthcare delivery across the network.
+                </p>
+                
+                <div class="modal-stats">
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">$15M</div>
+                        <div class="modal-stat-label">Annual Savings</div>
+                    </div>
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">60%</div>
+                        <div class="modal-stat-label">Wait Time Reduction</div>
+                    </div>
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">2.5M</div>
+                        <div class="modal-stat-label">Patients Served</div>
+                    </div>
+                    <div class="modal-stat-item">
+                        <div class="modal-stat-value">99.9%</div>
+                        <div class="modal-stat-label">Uptime</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Challenges & Solutions</h3>
+                <div class="modal-features-grid">
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">Fragmented Systems</h4>
+                        <p class="modal-feature-desc">
+                            <strong>Challenge:</strong> 50+ hospitals using 15 different EHR systems<br>
+                            <strong>Solution:</strong> Created unified API layer with real-time data synchronization
+                        </p>
+                    </div>
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">Data Silos</h4>
+                        <p class="modal-feature-desc">
+                            <strong>Challenge:</strong> Inaccessible patient data across facilities<br>
+                            <strong>Solution:</strong> Centralized data lake with advanced analytics capabilities
+                        </p>
+                    </div>
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">Inefficient Operations</h4>
+                        <p class="modal-feature-desc">
+                            <strong>Challenge:</strong> Manual processes causing delays<br>
+                            <strong>Solution:</strong> AI-powered workflow automation and predictive scheduling
+                        </p>
+                    </div>
+                    <div class="modal-feature-item">
+                        <h4 class="modal-feature-title">Patient Experience</h4>
+                        <p class="modal-feature-desc">
+                            <strong>Challenge:</strong> Long wait times and poor coordination<br>
+                            <strong>Solution:</strong> Integrated telemedicine and patient portal with real-time updates
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Implementation Timeline</h3>
+                <div style="background: var(--off-white); padding: 1.5rem; border-radius: 12px; margin-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600; color: var(--teal-primary);">Phase 1</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">Foundation (3 months)</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600; color: var(--teal-primary);">Phase 2</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">Core Systems (6 months)</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600; color: var(--teal-primary);">Phase 3</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">AI Integration (4 months)</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600; color: var(--teal-primary);">Phase 4</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">Scale & Optimize (Ongoing)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">What our client says</h3>
+                <div class="project-feedback-compact" style="margin: 1rem 0;">
+                    <p class="feedback-text-compact">
+                        "This platform transformed our healthcare delivery. Patient wait times reduced by 
+                        60% and diagnostic accuracy improved significantly. The AI-powered predictive 
+                        analytics have helped us identify at-risk patients weeks before traditional methods 
+                        would have flagged them."
+                    </p>
+                    <div class="feedback-author-compact">
+                        <div class="author-avatar-compact">SR</div>
+                        <div class="author-info-compact">
+                            <h5>Dr. Sarah Rodriguez</h5>
+                            <p>Chief Medical Officer, HealthNet Systems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Technology Implemented</h3>
+                <div class="modal-tech-stack">
+                    <span class="tech-badge">Microservices Architecture</span>
+                    <span class="tech-badge">Machine Learning</span>
+                    <span class="tech-badge">Real-time Analytics</span>
+                    <span class="tech-badge">Cloud Native</span>
+                    <span class="tech-badge">IoT Integration</span>
+                    <span class="tech-badge">Blockchain Security</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button class="modal-cta-btn" onclick="window.location.href='contact.html'">
+                Start Similar Project <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Clean Hero -->
+<section class="clean-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="page-badge fade-in-up">ENTERPRISE SOLUTIONS</div>
+                <h1 class="hero-title fade-in-up">Where Innovation Meets Enterprise Excellence</h1>
+                <p class="hero-description fade-in-up">
+                    We craft sophisticated software solutions that transform industries, 
+                    leveraging cutting-edge technology with proven enterprise expertise.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 1: Solutions -->
+<section class="solutions-section" id="solutions">
+    <div class="solutions-bg-pattern"></div>
+    <div class="container">
+        <div class="section-header fade-in-up" data-aos="fade-up">
+            <h2 class="mb-3">Transformative Software Solutions</h2>
+            <p class="section-subtitle">
+                Engineered for scale, designed for impact. Our solutions combine cutting-edge 
+                technology with deep industry expertise.
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Solution 1 -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="solution-card-clean stagger-item">
+                    <div class="solution-icon-clean">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3 class="solution-title-clean">Intelligent Healthcare Platform</h3>
+                    <p class="solution-description-clean">
+                        AI-driven patient management and diagnostic support system revolutionizing healthcare delivery.
+                    </p>
+                    <ul class="solution-features-clean">
+                        <li>Real-time patient monitoring</li>
+                        <li>Predictive analytics for diagnostics</li>
+                        <li>HIPAA compliant infrastructure</li>
+                        <li>IoT device integration</li>
+                    </ul>
+                    <button class="solution-detail-btn" onclick="openModal('solutionModal')">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Solution 2 -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+                <div class="solution-card-clean stagger-item">
+                    <div class="solution-icon-clean">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="solution-title-clean">AI Claims Automation Suite</h3>
+                    <p class="solution-description-clean">
+                        Next-generation insurance processing with machine learning algorithms for instant claim validation.
+                    </p>
+                    <ul class="solution-features-clean">
+                        <li>Automated fraud detection</li>
+                        <li>Real-time processing engine</li>
+                        <li>Natural language processing</li>
+                        <li>Multi-channel integration</li>
+                    </ul>
+                    <a href="solution-detail-claims.html" class="solution-detail-btn">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Solution 3 -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="solution-card-clean stagger-item">
+                    <div class="solution-icon-clean">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="solution-title-clean">Cognitive Learning System</h3>
+                    <p class="solution-description-clean">
+                        Adaptive learning platform that personalizes educational content based on student performance.
+                    </p>
+                    <ul class="solution-features-clean">
+                        <li>Personalized learning paths</li>
+                        <li>Real-time progress tracking</li>
+                        <li>Gamified engagement</li>
+                        <li>Cross-platform accessibility</li>
+                    </ul>
+                    <a href="solution-detail-learning.html" class="solution-detail-btn">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Solution 4 -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="solution-card-clean stagger-item">
+                    <div class="solution-icon-clean">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3 class="solution-title-clean">Quantum Fraud Detection</h3>
+                    <p class="solution-description-clean">
+                        Advanced fraud prevention system using quantum computing principles for financial security.
+                    </p>
+                    <ul class="solution-features-clean">
+                        <li>Real-time transaction monitoring</li>
+                        <li>Behavioral pattern recognition</li>
+                        <li>Quantum-safe encryption</li>
+                        <li>Global compliance framework</li>
+                    </ul>
+                    <a href="solution-detail-fraud.html" class="solution-detail-btn">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Solution 5 -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="solution-card-clean stagger-item">
+                    <div class="solution-icon-clean">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="solution-title-clean">Supply Chain Intelligence</h3>
+                    <p class="solution-description-clean">
+                        End-to-end supply chain optimization with predictive analytics and autonomous decision-making.
+                    </p>
+                    <ul class="solution-features-clean">
+                        <li>Predictive demand forecasting</li>
+                        <li>Autonomous inventory management</li>
+                        <li>Blockchain traceability</li>
+                        <li>Carbon footprint tracking</li>
+                    </ul>
+                    <a href="solution-detail-supply-chain.html" class="solution-detail-btn">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Solution 6 -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                <div class="solution-card-clean stagger-item">
+                    <div class="solution-icon-clean">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="solution-title-clean">Enterprise Intelligence Hub</h3>
+                    <p class="solution-detail-btn">
+                        Unified business intelligence platform with AI-powered insights and automated reporting.
+                    </p>
+                    <ul class="solution-features-clean">
+                        <li>Real-time KPI dashboards</li>
+                        <li>Predictive business modeling</li>
+                        <li>Automated report generation</li>
+                        <li>Cross-departmental analytics</li>
+                    </ul>
+                    <a href="solution-detail-intelligence.html" class="solution-detail-btn">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Industries -->
+<section class="industries-section">
+    <div class="industries-bg"></div>
+    <div class="container">
+        <div class="section-header fade-in-up" data-aos="fade-up">
+            <h2 class="mb-3">Industries Transformed</h2>
+            <p class="section-subtitle">
+                Our solutions are engineered for specific industry challenges, delivering measurable impact across sectors.
+            </p>
+        </div>
+        
+        <div class="industries-horizontal">
+            <!-- Industry 1 -->
+            <div class="industry-card-horizontal stagger-item" data-aos="fade-up" data-aos-delay="0">
+                <div class="industry-icon-horizontal">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h4 class="industry-name-horizontal">Healthcare & Life Sciences</h4>
+                <p class="industry-descriptor-horizontal">
+                    Digital transformation for hospitals, clinics, and pharmaceutical research.
+                </p>
+                <div class="industry-stats-horizontal">
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">150+</div>
+                        <div class="stat-label-horizontal">Hospitals</div>
+                    </div>
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">2.5M</div>
+                        <div class="stat-label-horizontal">Patients</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Industry 2 -->
+            <div class="industry-card-horizontal stagger-item" data-aos="fade-up" data-aos-delay="50">
+                <div class="industry-icon-horizontal">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4 class="industry-name-horizontal">Insurance & Risk Management</h4>
+                <p class="industry-descriptor-horizontal">
+                    Automated claims, policy management, and predictive risk assessment solutions.
+                </p>
+                <div class="industry-stats-horizontal">
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">40%</div>
+                        <div class="stat-label-horizontal">Faster Claims</div>
+                    </div>
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">99.8%</div>
+                        <div class="stat-label-horizontal">Accuracy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Industry 3 -->
+            <div class="industry-card-horizontal stagger-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="industry-icon-horizontal">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h4 class="industry-name-horizontal">Education Technology</h4>
+                <p class="industry-descriptor-horizontal">
+                    Next-generation learning platforms for institutions and corporate training.
+                </p>
+                <div class="industry-stats-horizontal">
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">250K</div>
+                        <div class="stat-label-horizontal">Students</div>
+                    </div>
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">60%</div>
+                        <div class="stat-label-horizontal">Engagement ↑</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Industry 4 -->
+            <div class="industry-card-horizontal stagger-item" data-aos="fade-up" data-aos-delay="150">
+                <div class="industry-icon-horizontal">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h4 class="industry-name-horizontal">Banking & FinTech</h4>
+                <p class="industry-descriptor-horizontal">
+                    Secure digital banking, fraud prevention, and investment platforms.
+                </p>
+                <div class="industry-stats-horizontal">
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">$50M</div>
+                        <div class="stat-label-horizontal">Fraud Prevented</div>
+                    </div>
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">24/7</div>
+                        <div class="stat-label-horizontal">Uptime</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Industry 5 -->
+            <div class="industry-card-horizontal stagger-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="industry-icon-horizontal">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h4 class="industry-name-horizontal">Logistics & Supply Chain</h4>
+                <p class="industry-descriptor-horizontal">
+                    Intelligent logistics, warehouse automation, and global supply chain optimization.
+                </p>
+                <div class="industry-stats-horizontal">
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">30%</div>
+                        <div class="stat-label-horizontal">Cost Reduction</div>
+                    </div>
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">99.9%</div>
+                        <div class="stat-label-horizontal">Accuracy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Industry 6 -->
+            <div class="industry-card-horizontal stagger-item" data-aos="fade-up" data-aos-delay="250">
+                <div class="industry-icon-horizontal">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h4 class="industry-name-horizontal">Manufacturing & Industry 4.0</h4>
+                <p class="industry-descriptor-horizontal">
+                    Smart factory solutions, IoT integration, and predictive maintenance systems.
+                </p>
+                <div class="industry-stats-horizontal">
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">45%</div>
+                        <div class="stat-label-horizontal">Efficiency ↑</div>
+                    </div>
+                    <div class="stat-item-horizontal">
+                        <div class="stat-number-horizontal">0</div>
+                        <div class="stat-label-horizontal">Downtime</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Projects -->
+<section class="projects-section" id="projects">
+    <div class="projects-wave"></div>
+    <div class="container">
+        <div class="section-header fade-in-up" data-aos="fade-up">
+            <h2 class="mb-3">Previous Project Showcase</h2>
+            <p class="section-subtitle">
+                Real-world implementations delivering transformative results for global enterprises.
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Project 1 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="0">
+                <div class="project-card-compact stagger-item">
+                    <div class="project-header-compact">
+                        <div class="project-badge-compact">
+                            <i class="fas fa-hospital"></i> Healthcare
+                        </div>
+                        <h3 class="project-title-compact">National Healthcare Intelligence Platform</h3>
+                        <p class="project-description-compact">
+                            A centralized healthcare management system serving 50+ hospitals, integrating 
+                            electronic health records, telemedicine, and predictive diagnostics.
+                        </p>
+                        <div class="project-rating-compact">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="rating-number-compact">5.0</span>
+                        </div>
+                        <div class="project-metrics-compact">
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">40%</div>
+                                <div class="metric-label-compact">Efficiency Gain</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">99.9%</div>
+                                <div class="metric-label-compact">Uptime</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">2.5M</div>
+                                <div class="metric-label-compact">Patients</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-feedback-compact">
+                        <p class="feedback-text-compact">
+                            "This platform transformed our healthcare delivery. Patient wait times reduced by 
+                            60% and diagnostic accuracy improved significantly."
+                        </p>
+                        <div class="feedback-author-compact">
+                            <div class="author-avatar-compact">SR</div>
+                            <div class="author-info-compact">
+                                <h5>Dr. Sarah Rodriguez</h5>
+                                <p>Chief Medical Officer, HealthNet Systems</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="project-detail-btn" onclick="openModal('projectModal')">
+                       View Project Overview <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="50">
+                <div class="project-card-compact stagger-item">
+                    <div class="project-header-compact">
+                        <div class="project-badge-compact">
+                            <i class="fas fa-shield-alt"></i> Insurance
+                        </div>
+                        <h3 class="project-title-compact">Global Claims Intelligence System</h3>
+                        <p class="project-description-compact">
+                            AI-powered claims processing platform reducing processing time from 14 days to 
+                            2 hours while maintaining 99.8% accuracy across 5 million annual claims.
+                        </p>
+                        <div class="project-rating-compact">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-number-compact">4.8</span>
+                        </div>
+                        <div class="project-metrics-compact">
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">95%</div>
+                                <div class="metric-label-compact">Faster Processing</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">$15M</div>
+                                <div class="metric-label-compact">Annual Savings</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">5M</div>
+                                <div class="metric-label-compact">Claims/Year</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-feedback-compact">
+                        <p class="feedback-text-compact">
+                            "The automation transformed our operations. What used to take weeks now happens 
+                            in hours. Customer satisfaction scores have never been higher."
+                        </p>
+                        <div class="feedback-author-compact">
+                            <div class="author-avatar-compact">MC</div>
+                            <div class="author-info-compact">
+                                <h5>Michael Chen</h5>
+                                <p>VP of Operations, Global Insurance Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="project-detail-insurance.html" class="project-detail-btn">
+                       View Project Overview <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card-compact stagger-item">
+                    <div class="project-header-compact">
+                        <div class="project-badge-compact">
+                            <i class="fas fa-graduation-cap"></i> Education
+                        </div>
+                        <h3 class="project-title-compact">Adaptive Learning Ecosystem</h3>
+                        <p class="project-description-compact">
+                            Personalized learning platform serving 100,000+ students across 50 institutions, 
+                            using AI to adapt content and improve learning outcomes by 45%.
+                        </p>
+                        <div class="project-rating-compact">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="rating-number-compact">5.0</span>
+                        </div>
+                        <div class="project-metrics-compact">
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">45%</div>
+                                <div class="metric-label-compact">Better Outcomes</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">60%</div>
+                                <div class="metric-label-compact">Engagement ↑</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">100K</div>
+                                <div class="metric-label-compact">Students</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-feedback-compact">
+                        <p class="feedback-text-compact">
+                            "The platform's ability to personalize learning at scale is remarkable. We've seen 
+                            unprecedented improvements in student performance and engagement."
+                        </p>
+                        <div class="feedback-author-compact">
+                            <div class="author-avatar-compact">DW</div>
+                            <div class="author-info-compact">
+                                <h5>David Wilson</h5>
+                                <p>Dean of Digital Learning, University Consortium</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="project-detail-education.html" class="project-detail-btn">
+                       View Project Overview <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="project-card-compact stagger-item">
+                    <div class="project-header-compact">
+                        <div class="project-badge-compact">
+                            <i class="fas fa-university"></i> Banking
+                        </div>
+                        <h3 class="project-title-compact">Quantum Fraud Prevention Network</h3>
+                        <p class="project-description-compact">
+                            Advanced fraud detection system preventing $50M+ in fraudulent transactions 
+                            annually using machine learning and quantum computing principles.
+                        </p>
+                        <div class="project-rating-compact">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="rating-number-compact">5.0</span>
+                        </div>
+                        <div class="project-metrics-compact">
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">$50M+</div>
+                                <div class="metric-label-compact">Fraud Prevented</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">75%</div>
+                                <div class="metric-label-compact">False Positives ↓</div>
+                            </div>
+                            <div class="metric-item-compact">
+                                <div class="metric-value-compact">10ms</div>
+                                <div class="metric-label-compact">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-feedback-compact">
+                        <p class="feedback-text-compact">
+                            "The system's predictive capabilities are extraordinary. We're catching fraud 
+                            attempts we previously missed while dramatically reducing false positives."
+                        </p>
+                        <div class="feedback-author-compact">
+                            <div class="author-avatar-compact">AT</div>
+                            <div class="author-info-compact">
+                                <h5>Dr. Alex Thompson</h5>
+                                <p>Chief Security Officer, Global Banking Group</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="project-detail-banking.html" class="project-detail-btn">
+                       View Project Overview <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- View All Projects Button -->
+        <div class="view-all-btn" data-aos="fade-up" data-aos-delay="200">
+            <a href="#" class="btn-view-all">
+                View All Projects <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Clean CTA -->
+<section class="clean-cta">
+    <div class="cta-content-clean">
+        <h2 class="cta-title-clean">Ready to Transform Your Enterprise?</h2>
+        <p class="cta-description-clean">
+            Let's architect your digital future. Our team of experts will design, build, 
+            and deploy solutions that drive measurable business impact.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+            <a href="{% url 'contact' %}" class="btn-clean">
+                Start Your Transformation <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+            <a href="" class="btn btn-outline-light" style="padding: 1rem 2.5rem; border-radius: 50px;">
+                View All Sample Projects <i class="fas fa-external-link-alt ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

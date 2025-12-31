@@ -1,0 +1,110 @@
+{% load inquiry_filters %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Company</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Assigned To</th>
+                <th>Last Contact</th>
+                <th>Next Follow-up</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inquiry in recent_inquiries %}
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        
+                        <div>
+                            <strong>{{ inquiry.first_name }} {{ inquiry.last_name }}</strong>
+                            <br>
+                            <small class="text-muted">{{ inquiry.email }}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ inquiry.company }}</td>
+                <td>
+                    {% if inquiry.status == 'new' %}
+                    <span class="badge bg-primary">New</span>
+                    {% elif inquiry.status == 'contacted' %}
+                    <span class="badge bg-info">Contacted</span>
+                    {% elif inquiry.status == 'in_progress' %}
+                    <span class="badge bg-warning">In Progress</span>
+                    {% elif inquiry.status == 'qualified' %}
+                    <span class="badge bg-success">Qualified</span>
+                    {% elif inquiry.status == 'converted' %}
+                    <span class="badge bg-success">Converted</span>
+                    {% elif inquiry.status == 'not_interested' %}
+                    <span class="badge bg-secondary">Not Interested</span>
+                    {% else %}
+                    <span class="badge bg-danger">Spam</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if inquiry.priority == 'urgent' %}
+                    <span class="badge bg-danger">Urgent</span>
+                    {% elif inquiry.priority == 'high' %}
+                    <span class="badge bg-warning">High</span>
+                    {% elif inquiry.priority == 'medium' %}
+                    <span class="badge bg-info">Medium</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Low</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if inquiry.assigned_to %}
+                    <span class="badge bg-light text-dark">
+                        {{ inquiry.assigned_to.first_name|default:inquiry.assigned_to.username }}
+                    </span>
+                    {% else %}
+                    <span class="badge bg-secondary">Unassigned</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if inquiry.last_contacted %}
+                    <small class="text-muted">{{ inquiry.last_contacted|timesince }} ago</small>
+                    {% else %}
+                    <small class="text-muted">Never</small>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if inquiry.next_follow_up %}
+                    <small class="text-muted">{{ inquiry.next_follow_up|date:"M d, H:i" }}</small>
+                    {% else %}
+                    <small class="text-muted">Not scheduled</small>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <a href="{% url 'custom_admin:inquiry_detail' inquiry.id %}" 
+                           class="btn btn-primary">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="mailto:{{ inquiry.email }}" 
+                           class="btn btn-success">
+                            <i class="fas fa-envelope" style="margin-top: 8px;"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center py-4">
+                    <i class="fas fa-inbox text-muted mb-3" style="font-size: 2rem;"></i>
+                    <p class="text-muted">
+                        {% if status_filter != 'all' %}
+                        No {{ status_filter|title }} inquiries
+                        {% else %}
+                        No recent inquiries
+                        {% endif %}
+                    </p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

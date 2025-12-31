@@ -1,0 +1,619 @@
+
+
+{% extends 'custom_admin/base.html' %}
+{% load inquiry_filters %}
+
+{% block content %}
+<!-- Statistics Overview -->
+<div class="row mb-5">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ total_inquiries }}</h3>
+                <p>Total Inquiries</p>
+                <div class="stat-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>12% from last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ new_inquiries }}</h3>
+                <p>New Inquiries</p>
+                <div class="stat-trend {% if new_inquiries > 0 %}trend-up{% else %}trend-down{% endif %}">
+                    <i class="fas {% if new_inquiries > 0 %}fa-arrow-up{% else %}fa-arrow-down{% endif %}"></i>
+                    <span>Requires attention</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ contacted_inquiries }}</h3>
+                <p>Contacted</p>
+                <div class="stat-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Active conversations</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ converted_inquiries }}</h3>
+                <p>Converted</p>
+                <div class="stat-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Successful conversions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Status Overview -->
+<div class="row mb-5">
+    <div class="col-xl-4 mb-4">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h4><i class="fas fa-tasks me-2"></i>Inquiry Status</h4>
+            </div>
+            <div style="height: 280px;">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-4 mb-4">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h4><i class="fas fa-exclamation-triangle me-2"></i>Priority Breakdown</h4>
+            </div>
+            <div style="height: 280px;">
+                <canvas id="priorityChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-4 mb-4">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h4><i class="fas fa-chart-pie me-2"></i>Services Distribution</h4>
+            </div>
+            <div style="height: 280px;">
+                <canvas id="servicesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Follow-up Tracking -->
+<div class="row mb-5">
+<!-- Pending Follow-ups -->
+<div class="col-lg-6 mb-4">
+    <div class="table-container">
+        <div class="table-title">
+            <h4><i class="fas fa-calendar-check me-2"></i>Pending Follow-ups</h4>
+            <span class="badge bg-warning">{{ pending_tasks|length }}</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Due Date </th>
+                        <th>Assigned To</th>
+                        <th>Task</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in pending_tasks %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                               
+                                <div>
+                                    <a href="{% url 'custom_admin:inquiry_detail' task.inquiry.id %}" 
+                                       class="text-decoration-none">
+                                        <strong>{{ task.inquiry.first_name }} {{ task.inquiry.last_name }}</strong>
+                                    </a>
+                                    <br>
+                                    <small class="text-muted">{{ task.inquiry.email }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>{{ task.due_date|date:"M d, Y" }}</strong>
+                            <br>
+                            <small class="text-muted">{{ task.due_date|date:"h:i A" }}</small>
+                            <br>
+                            <small class="text-muted">(in {{ task.due_date|timeuntil }})</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark">
+                                {{ task.assigned_to.first_name|default:task.assigned_to.username }}
+                            </span>
+                        </td>
+                        <td>
+                            <small>{{ task.task|truncatechars:50 }}</small>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            <i class="fas fa-check-circle text-muted mb-3" style="font-size: 2rem;"></i>
+                            <p class="text-muted">No pending follow-ups</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Overdue Follow-ups -->
+<div class="col-lg-6 mb-4">
+    <div class="table-container">
+        <div class="table-title">
+            <h4><i class="fas fa-calendar-times me-2"></i>Overdue Follow-ups</h4>
+            <span class="badge bg-danger">{{ overdue_tasks|length }}</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Overdue Since</th>
+                        <th>Assigned To</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in overdue_tasks %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                               
+                                <div>
+                                    <a href="{% url 'custom_admin:inquiry_detail' task.inquiry.id %}" 
+                                       class="text-decoration-none">
+                                        <strong>{{ task.inquiry.first_name }} {{ task.inquiry.last_name }}</strong>
+                                    </a>
+                                    <br>
+                                    <small class="text-muted">{{ task.inquiry.company }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>{{ task.due_date|timesince }}</strong>
+                            <br>
+                            <small class="text-muted">overdue</small>
+                            <br>
+                            <small class="text-muted">Was due: {{ task.due_date|date:"M d, h:i A" }}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark">
+                                {{ task.assigned_to.first_name|default:task.assigned_to.username }}
+                            </span>
+                        </td>
+                        <td>
+                            <!-- FIXED: Only show complete button if task is not already completed -->
+                            {% if not task.completed %}
+                            <form method="post" 
+                                  action="{% url 'custom_admin:mark_follow_up_completed' task.id %}?from_dashboard=1" 
+                                  class="d-inline mark-complete-form"
+                                  data-task-id="{{ task.id }}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-success d-flex" style="border-radius: ;">
+                                    <i class="fas fa-check"></i> <span class="badge bg-success">Mark Complete</span>
+                                </button>
+                            </form>
+                            {% else %}
+                            <span class="badge bg-success">Already Completed</span>
+                            {% endif %}
+                            
+                            {% comment %} <a href="{% url 'custom_admin:inquiry_detail' task.inquiry.id %}" 
+                               class="btn btn-sm btn-primary">
+                                <i class="fas fa-edit"></i> View
+                            </a> {% endcomment %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            <i class="fas fa-thumbs-up text-muted mb-3" style="font-size: 2rem;"></i>
+                            <p class="text-muted">No overdue follow-ups</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- Recent Inquiries with Status -->
+<!-- Recent Inquiries with Status -->
+<div class="row">
+    <div class="col-12" id="recent-inquiries">
+        <div class="table-container">
+            <div class="table-title">
+                <h4><i class="fas fa-history me-2"></i>Recent Inquiries</h4>
+                <div class="d-flex gap-2">
+                   
+                    <a href="{% url 'custom_admin:inquiry_list' %}" class="btn btn-primary btn-sm">
+                        View All
+                    </a>
+                </div>
+            </div>
+            
+            <!-- AJAX CONTENT CONTAINER -->
+            <div id="recent-inquiries-container">
+                {% include 'custom_admin/recent_inquiries.html' %}
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle mark complete forms with AJAX
+        document.querySelectorAll('.mark-complete-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const form = this;
+                const taskId = form.dataset.taskId;
+                const button = form.querySelector('button[type="submit"]');
+                
+                // Disable button to prevent double click
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Completing...';
+                
+                // Submit via AJAX
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Find and remove the table row
+                        const row = form.closest('tr');
+                        if (row) {
+                            row.style.opacity = '0.5';
+                            setTimeout(() => {
+                                row.remove();
+                                // Update overdue count badge
+                                const badge = document.querySelector('.table-title .badge.bg-danger');
+                                if (badge) {
+                                    const currentCount = parseInt(badge.textContent);
+                                    if (currentCount > 0) {
+                                        badge.textContent = currentCount - 1;
+                                    }
+                                }
+                            }, 500);
+                        }
+                        
+                        // Show success message
+                        showToast('Success', data.message, 'success');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    button.disabled = false;
+                    button.innerHTML = '<i class="fas fa-check"></i> Complete';
+                    showToast('Error', 'Failed to complete task', 'error');
+                });
+            });
+        });
+    });
+    
+    // Toast notification function
+    function showToast(title, message, type) {
+        const toastHtml = `
+            <div class="toast align-items-center text-bg-${type} border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>${title}:</strong> ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        `;
+        
+        const toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) {
+            const container = document.createElement('div');
+            container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+            document.body.appendChild(container);
+        }
+        
+        const container = document.querySelector('.toast-container');
+        container.insertAdjacentHTML('beforeend', toastHtml);
+        
+        const toastElement = container.lastElementChild;
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+        
+        // Remove toast after it hides
+        toastElement.addEventListener('hidden.bs.toast', function() {
+            this.remove();
+        });
+    }
+    // Status Chart
+    const statusData = {
+        labels: [
+            {% for stat in status_stats %}
+            '{{ stat.status|title }}',
+            {% endfor %}
+        ],
+        datasets: [{
+            data: [
+                {% for stat in status_stats %}
+                {{ stat.count }},
+                {% endfor %}
+            ],
+            backgroundColor: [
+                '#0d9488', '#3b82f6', '#f59e0b', '#10b981',
+                '#8b5cf6', '#94a3b8', '#ef4444'
+            ],
+            borderWidth: 0,
+            borderRadius: 8
+        }]
+    };
+
+    const statusCtx = document.getElementById('statusChart').getContext('2d');
+    const statusChart = new Chart(statusCtx, {
+        type: 'doughnut',
+        data: statusData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '75%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        usePointStyle: true,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Priority Chart
+    const priorityData = {
+        labels: [
+            {% for stat in priority_stats %}
+            '{{ stat.priority|title }}',
+            {% endfor %}
+        ],
+        datasets: [{
+            data: [
+                {% for stat in priority_stats %}
+                {{ stat.count }},
+                {% endfor %}
+            ],
+            backgroundColor: [
+            '#94a3b8', '#f59e0b','#ef4444',  '#3b82f6'
+            ],
+            borderWidth: 0,
+            borderRadius: 8
+        }]
+    };
+
+const priorityCtx = document.getElementById('priorityChart').getContext('2d');
+const priorityChart = new Chart(priorityCtx, {
+    type: 'doughnut',
+    data: priorityData,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '75%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 15,
+                    usePointStyle: true,
+                    font: {
+                        size: 11
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Services Chart
+const serviceData = {
+    labels: [{% for stat in service_stats %}'{{ stat.service }}',{% endfor %}],
+    datasets: [{
+        data: [{% for stat in service_stats %}{{ stat.count }},{% endfor %}],
+        backgroundColor: [
+            '#0d9488', '#14b8a6', '#10b981', '#0ea5e9',
+            '#8b5cf6', '#ec4899', '#f59e0b', '#ef4444'
+        ],
+        borderWidth: 0,
+        borderRadius: 6,
+        spacing: 4
+    }]
+};
+
+const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+const servicesChart = new Chart(servicesCtx, {
+    type: 'doughnut',
+    data: serviceData,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '75%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 15,
+                    usePointStyle: true,
+                    font: {
+                        size: 11
+                    }
+                }
+            }
+        }
+    }
+});
+
+// AJAX Filtering for Recent Inquiries
+document.addEventListener('DOMContentLoaded', function() {
+    const filterOptions = document.querySelectorAll('.filter-option');
+    const container = document.getElementById('recent-inquiries-container');
+    
+    if (!container) {
+        console.error('Container not found: #recent-inquiries-container');
+        return;
+    }
+    
+    filterOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const status = this.dataset.status;
+            const filterText = this.textContent.trim();
+            
+            console.log('Filter clicked:', status); // Debug log
+            
+            // Update UI
+            updateFilterUI(status, filterText, this);
+            
+            // Load data
+            loadFilteredData(status);
+        });
+    });
+    
+    function updateFilterUI(status, text, activeElement) {
+        // Update button text
+        const filterTextEl = document.getElementById('filter-text');
+        if (filterTextEl) {
+            filterTextEl.textContent = text;
+        }
+        
+        // Update active class
+        filterOptions.forEach(opt => opt.classList.remove('active'));
+        activeElement.classList.add('active');
+        
+        // Close dropdown
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        if (dropdownToggle) {
+            const dropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
+            if (dropdown) dropdown.hide();
+        }
+    }
+    
+    function loadFilteredData(status) {
+        // Show loading
+        const originalContent = container.innerHTML;
+        container.innerHTML = `
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2 text-muted">Loading inquiries...</p>
+            </div>
+        `;
+        
+        // Build URL
+        let url = window.location.pathname;
+        const params = new URLSearchParams();
+        
+        if (status !== 'all') {
+            params.append('status', status);
+        }
+        
+        // Add any existing query parameters (except status)
+        const currentParams = new URLSearchParams(window.location.search);
+        for (const [key, value] of currentParams) {
+            if (key !== 'status') {
+                params.append(key, value);
+            }
+        }
+        
+        if (params.toString()) {
+            url += '?' + params.toString();
+        }
+        
+        console.log('Fetching URL:', url); // Debug log
+        
+        // Send AJAX request
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            }
+            return response.text();
+        })
+        .then(html => {
+            console.log('Response received:', html.length, 'bytes'); // Debug log
+            container.innerHTML = html;
+            
+            // Smooth scroll to container if needed
+            const containerRect = container.getBoundingClientRect();
+            if (containerRect.top < 0 || containerRect.top > window.innerHeight) {
+                container.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching filtered data:', error);
+            container.innerHTML = originalContent;
+            showToast('Error', 'Failed to load filtered inquiries. Please try again.', 'error');
+        });
+    }
+    
+    // Debug: Test if events are firing
+    console.log('Filter options found:', filterOptions.length);
+    filterOptions.forEach(opt => {
+        console.log('Option:', opt.dataset.status, opt.textContent);
+    });
+});
+</script>
+{% endblock %}

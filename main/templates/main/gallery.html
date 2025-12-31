@@ -1,0 +1,284 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_css %}    <link rel="stylesheet" href="{% static 'css/gallery-style.css' %}">{% endblock extra_css %}
+
+{% block extra_js %}<script src="{% static 'js/gallery-script.js' %}"></script>{% endblock extra_js %}
+
+{% block content %}
+  <!-- Gallery Hero -->
+  <section class="gallery-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="page-badge fade-in-up">VISUAL GALLERY</div>
+                <h1 class="hero-title fade-in-up">Our Work in Focus</h1>
+                <p class="hero-description fade-in-up">
+                    Explore our portfolio through captivating visuals, 
+                    client events, project implementations, and behind-the-scenes moments.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Filters -->
+<div class="gallery-filters">
+    <div class="container">
+        <div class="filter-buttons">
+            <div class="filter-btn active" data-filter="all">
+                <i class="fas fa-layer-group"></i>
+                All Media
+            </div>
+            <div class="filter-btn" data-filter="projects">
+                <i class="fas fa-code"></i>
+                Project Showcases
+            </div>
+            <div class="filter-btn" data-filter="events">
+                <i class="fas fa-users"></i>
+                Events & Conferences
+            </div>
+            <div class="filter-btn" data-filter="team">
+                <i class="fas fa-user-friends"></i>
+                Team & Culture
+            </div>
+            <div class="filter-btn" data-filter="awards">
+                <i class="fas fa-trophy"></i>
+                Awards & Recognition
+            </div>
+            <div class="filter-btn" data-filter="videos">
+                <i class="fas fa-play-circle"></i>
+                Videos
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Gallery -->
+<section id="featured-gallery">
+    <div class="container">
+        <div class="featured-gallery fade-in-up">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="featured-content">
+                        <div class="featured-badge">FEATURED COLLECTION</div>
+                        <h2>Enterprise AI Implementation Journey</h2>
+                        <p>A visual story of our largest AI implementation project for a Fortune 500 client, showcasing the transformation from concept to production.</p>
+                        <button class="btn btn-outline-light-custom">View Full Collection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section id="gallery-grid">
+    <div class="container">
+        <div class="gallery-grid">
+            <!-- Item 1 - Project -->
+            <div class="gallery-item stagger-item" data-categories="projects">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Project Implementation" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Project Showcase</div>
+                    <h3 class="gallery-title">Cloud Migration Dashboard</h3>
+                    <p class="gallery-description" style="color: white;">Real-time monitoring interface for enterprise cloud migration project.</p>
+                </div>
+            </div>
+            
+            <!-- Item 2 - Event -->
+            <div class="gallery-item stagger-item" data-categories="events">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Conference Event" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Event</div>
+                    <h3 class="gallery-title">Annual Tech Summit 2023</h3>
+                    <p class="gallery-description" style="color: white;">Industry leaders discussing future of enterprise technology.</p>
+                </div>
+            </div>
+            
+            <!-- Item 3 - Team -->
+            <div class="gallery-item stagger-item" data-categories="team">
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Team Collaboration" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Team & Culture</div>
+                    <h3 class="gallery-title">Innovation Workshop</h3>
+                    <p class="gallery-description" style="color: white;">Our team brainstorming solutions for complex client challenges.</p>
+                </div>
+            </div>
+            
+            <!-- Item 4 - Video -->
+            <div class="gallery-item stagger-item" data-categories="videos">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="AI Technology Video" class="gallery-image">
+                <div class="video-indicator">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Video</div>
+                    <h3 class="gallery-title">AI Model Training</h3>
+                    <p class="gallery-description" style="color: white;">Behind-the-scenes look at our AI development process.</p>
+                </div>
+            </div>
+            
+            <!-- Item 5 - Award -->
+            <div class="gallery-item stagger-item" data-categories="awards">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Award Ceremony" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Award</div>
+                    <h3 class="gallery-title">Innovation Excellence Award</h3>
+                    <p class="gallery-description" style="color: white;">Recognized for breakthrough in enterprise automation.</p>
+                </div>
+            </div>
+            
+            <!-- Item 6 - Project -->
+            <div class="gallery-item stagger-item" data-categories="projects">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Data Center" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Project Showcase</div>
+                    <h3 class="gallery-title">Green Data Center</h3>
+                    <p class="gallery-description" style="color: white;">Sustainable infrastructure project with 40% energy reduction.</p>
+                </div>
+            </div>
+            
+            <!-- Item 7 - Event -->
+            <div class="gallery-item stagger-item" data-categories="events">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Client Meeting" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Event</div>
+                    <h3 class="gallery-title">Client Success Celebration</h3>
+                    <p class="gallery-description" style="color: white;">Celebrating successful project delivery with client team.</p>
+                </div>
+            </div>
+            
+            <!-- Item 8 - Team -->
+            <div class="gallery-item stagger-item" data-categories="team">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Team Celebration" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Team & Culture</div>
+                    <h3 class="gallery-title">Product Launch Party</h3>
+                    <p class="gallery-description" style="color: white;">Celebrating the successful launch of our latest platform.</p>
+                </div>
+            </div>
+            
+            <!-- Item 9 - Video -->
+            <div class="gallery-item stagger-item" data-categories="videos">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Manufacturing Tech" class="gallery-image">
+                <div class="video-indicator">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Video</div>
+                    <h3 class="gallery-title">Smart Factory Tour</h3>
+                    <p class="gallery-description" style="color: white;">Virtual tour of our IoT implementation in manufacturing.</p>
+                </div>
+            </div>
+            
+            <!-- Item 10 - Award -->
+            <div class="gallery-item stagger-item" data-categories="awards">
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Security Certification" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Award</div>
+                    <h3 class="gallery-title">Security Excellence</h3>
+                    <p class="gallery-description" style="color: white;">Highest security certification achieved for enterprise platform.</p>
+                </div>
+            </div>
+            
+            <!-- Item 11 - Project -->
+            <div class="gallery-item stagger-item" data-categories="projects">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Mobile App Interface" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Project Showcase</div>
+                    <h3 class="gallery-title">Banking App Redesign</h3>
+                    <p class="gallery-description" style="color: white;">User-centered redesign for major financial institution.</p>
+                </div>
+            </div>
+            
+            <!-- Item 12 - Event -->
+            <div class="gallery-item stagger-item" data-categories="events">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Hackathon Event" class="gallery-image">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Event</div>
+                    <h3 class="gallery-title">Internal Hackathon</h3>
+                    <p class="gallery-description" style="color: white;">24-hour innovation challenge with cross-functional teams.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Showcase -->
+<section class="video-showcase">
+    <div class="container">
+        <h2 class="text-center mb-5 fade-in-up">Featured Video</h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="video-container fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Featured Video Thumbnail" class="video-thumbnail">
+                    <button class="video-play-btn" id="playVideo">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <div class="video-info">
+                        <h3 class="video-title">The Future of Enterprise Technology</h3>
+                        <p class="video-description">Join our CEO and CTO as they discuss the emerging technologies that will shape enterprise software over the next decade, from quantum computing to ethical AI.</p>
+                        <div class="video-meta">
+                            <div class="meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>24 min</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>March 2024</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-eye"></i>
+                                <span>15.2K views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+    <button class="modal-close" id="closeModal">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="" class="modal-image">
+        <div class="modal-info">
+            <h3 id="modalTitle" class="modal-title"></h3>
+            <p id="modalDescription" class="modal-description" style="color: white;"></p>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<section>
+    <div class="container">
+        <div class="gallery-cta fade-in-up">
+            <h2>Want to See More?</h2>
+            <p>Follow us on social media for daily updates, behind-the-scenes content, and the latest from our projects and team.</p>
+            <button class="btn btn-cta-glow">Follow Our Journey</button>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

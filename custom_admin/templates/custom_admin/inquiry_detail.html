@@ -1,0 +1,467 @@
+{% extends 'custom_admin/base.html' %}
+
+{% block content %}
+<div class="row">
+    <!-- Inquiry Details -->
+    <div class="col-lg-8 mb-4">
+        <div class="table-container">
+            <div class="table-title">
+                <h4>Inquiry Details</h4>
+                <div class="d-flex gap-2 align-items-center ">
+                    <a href="{% url 'custom_admin:inquiry_list' %}" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-arrow-left me-2"></i> Back to List
+                    </a>
+                    <a href="mailto:{{ inquiry.email }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-envelope me-2 py-2" ></i> Email Now
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Status Management Card -->
+            <div class="card border-0 bg-light mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <h6 class="text-muted mb-2">Current Status</h6>
+                            <div class="d-flex align-items-center gap-2">
+                                {% if inquiry.status == 'new' %}
+                                <span class="badge bg-primary px-3 py-2">New Inquiry</span>
+                                {% elif inquiry.status == 'contacted' %}
+                                <span class="badge bg-info px-3 py-2">Contacted</span>
+                                {% elif inquiry.status == 'in_progress' %}
+                                <span class="badge bg-warning px-3 py-2">In Progress</span>
+                                {% elif inquiry.status == 'qualified' %}
+                                <span class="badge bg-success px-3 py-2">Qualified Lead</span>
+                                {% elif inquiry.status == 'converted' %}
+                                <span class="badge bg-success px-3 py-2">Converted to Customer</span>
+                                {% elif inquiry.status == 'not_interested' %}
+                                <span class="badge bg-secondary px-3 py-2">Not Interested</span>
+                                {% else %}
+                                <span class="badge bg-danger px-3 py-2">Spam</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <h6 class="text-muted mb-2">Priority</h6>
+                            {% if inquiry.priority == 'urgent' %}
+                            <span class="badge bg-danger px-3 py-2">Urgent</span>
+                            {% elif inquiry.priority == 'high' %}
+                            <span class="badge bg-warning px-3 py-2">High</span>
+                            {% elif inquiry.priority == 'medium' %}
+                            <span class="badge bg-info px-3 py-2">Medium</span>
+                            {% else %}
+                            <span class="badge bg-secondary px-3 py-2">Low</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <h6 class="text-muted mb-2">Assigned To</h6>
+                            {% if inquiry.assigned_to %}
+                            <span class="badge bg-dark px-3 py-2">
+                                <i class="fas fa-user me-2"></i>
+                                {{ inquiry.assigned_to.get_full_name|default:inquiry.assigned_to.username }}
+                            </span>
+                            {% else %}
+                            <span class="badge bg-secondary px-3 py-2">Unassigned</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customer Information -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-3">Contact Information</h6>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Full Name</label>
+                                <p class="h5">{{ inquiry.first_name }} {{ inquiry.last_name }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Email</label>
+                                <p class="h5">
+                                    <a href="mailto:{{ inquiry.email }}" class="text-decoration-none">
+                                        {{ inquiry.email }}
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Phone</label>
+                                <p class="h5">{{ inquiry.phone|default:"Not provided" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Job Title</label>
+                                <p class="h5">{{ inquiry.job_title|default:"Not specified" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-3">Company Information</h6>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Company</label>
+                                <p class="h5">{{ inquiry.company }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Country</label>
+                                <p class="h5">
+                                    <span class="badge-country">
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        {{ inquiry.country }}
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Industry</label>
+                                <p class="h5">{{ inquiry.industry }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted mb-1">Service Interested</label>
+                                <p class="h5">{{ inquiry.service }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Details -->
+            <div class="card border-0 bg-light mb-4">
+                <div class="card-body">
+                    <h6 class="card-title text-muted mb-3">Project Details</h6>
+                    <div class="card">
+                        <div class="card-body bg-white rounded">
+                            <p class="card-text">{{ inquiry.details|linebreaks }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timeline -->
+            <div class="card border-0 bg-light">
+                <div class="card-body">
+                    <h6 class="card-title text-muted mb-3">Timeline</h6>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Inquiry Received</h6>
+                                <p class="text-muted mb-0">{{ inquiry.created_at|date:"F d, Y H:i:s" }}</p>
+                            </div>
+                        </div>
+                        
+                        {% if inquiry.last_contacted %}
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-info"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Last Contacted</h6>
+                                <p class="text-muted mb-0">{{ inquiry.last_contacted|date:"F d, Y H:i:s" }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if inquiry.next_follow_up %}
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-warning"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Next Follow-up</h6>
+                                <p class="text-muted mb-0">{{ inquiry.next_follow_up|date:"F d, Y H:i:s" }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if inquiry.converted_at %}
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-success"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Converted to Customer</h6>
+                                <p class="text-muted mb-0">{{ inquiry.converted_at|date:"F d, Y H:i:s" }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar: Actions & Notes -->
+    <div class="col-lg-4">
+        <!-- Quick Actions -->
+        <div class="table-container mb-4">
+            <h5 class="mb-3">Quick Actions</h5>
+            <div class="d-grid gap-2">
+                <!-- Status Update Form -->
+                <div class="card border-0 bg-light mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-3">Update Status</h6>
+                        <form method="post" action="{% url 'custom_admin:update_inquiry_status' inquiry.id %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <select name="status" class="form-select" required>
+                                    {% for value, label in status_choices %}
+                                    <option value="{{ value }}" {% if inquiry.status == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select name="priority" class="form-select" required>
+                                    {% for value, label in priority_choices %}
+                                    <option value="{{ value }}" {% if inquiry.priority == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select name="assigned_to" class="form-select">
+                                    <option value="">Assign to...</option>
+                                    {% for user in all_users %}
+                                    <option value="{{ user.id }}" {% if inquiry.assigned_to == user %}selected{% endif %}>
+                                        {{ user.get_full_name|default:user.username }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-save me-2"></i> Update Status
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Add Note Form -->
+                <div class="card border-0 bg-light mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-3">Add Internal Note</h6>
+                        <form method="post" action="{% url 'custom_admin:add_inquiry_note' inquiry.id %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <textarea name="note" class="form-control" rows="3" 
+                                          placeholder="Add internal notes about this inquiry..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-plus me-2"></i> Add Note
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Schedule Follow-up -->
+                <div class="card border-0 bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-3">Schedule Follow-up</h6>
+                        <form method="post" action="{% url 'custom_admin:create_follow_up' inquiry.id %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <input type="datetime-local" name="due_date" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="task" class="form-control" rows="2" 
+                                          placeholder="Follow-up task details..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100">
+                                <i class="fas fa-calendar-plus me-2"></i> Schedule Follow-up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notes History -->
+        <div class="table-container mb-4">
+            <h5 class="mb-3">Internal Notes</h5>
+            <div class="notes-list" style="max-height: 300px; overflow-y: auto;">
+                {% for note in notes %}
+                <div class="card border-0 bg-light mb-2">
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-user me-1"></i>
+                                {{ note.user.get_full_name|default:note.user.username }}
+                            </small>
+                            <small class="text-muted">{{ note.created_at|timesince }} ago</small>
+                        </div>
+                        <p class="mb-0">{{ note.note }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-4">
+                    <i class="fas fa-sticky-note text-muted mb-3" style="font-size: 2rem;"></i>
+                    <p class="text-muted">No notes yet</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Follow-up Tasks -->
+        <div class="table-container">
+            <h5 class="mb-3">Follow-up Tasks</h5>
+            <div class="tasks-list" style="max-height: 300px; overflow-y: auto;">
+                {% for task in followup_tasks %}
+                <div class="card border-0 bg-light mb-2">
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge {% if task.completed %}bg-success{% elif task.due_date < now %}bg-danger{% else %}bg-warning{% endif %}">
+                                {% if task.completed %}
+                                Completed
+                                {% elif task.due_date < now %}
+                                Overdue
+                                {% else %}
+                                Pending
+                                {% endif %}
+                            </span>
+                            <small class="text-muted">{{ task.due_date|date:"M d, H:i" }}</small>
+                        </div>
+                        <p class="mb-2">{{ task.task }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="fas fa-user me-1"></i>
+                                {{ task.assigned_to.get_full_name|default:task.assigned_to.username }}
+                            </small>
+                            {% if not task.completed %}
+                            <form method="post" action="{% url 'custom_admin:mark_follow_up_completed' task.id %}" class="mb-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    <i class="fas fa-check"></i> Mark Complete
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-4">
+                    <i class="fas fa-tasks text-muted mb-3" style="font-size: 2rem;"></i>
+                    <p class="text-muted">No follow-up tasks</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Quick Actions -->
+<div class="modal fade" id="quickActionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Quick Action</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="quickActionContent">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e2e8f0;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -24px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.timeline-content {
+    padding-bottom: 10px;
+}
+</style>
+
+<script>
+// Quick action functions
+function quickAction(action) {
+    const inquiryId = {{ inquiry.id }};
+    let url, method, data;
+    
+    switch(action) {
+        case 'mark_contacted':
+            url = `/custom-admin/inquiries/${inquiryId}/update-status/`;
+            method = 'POST';
+            data = {
+                status: 'contacted',
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            };
+            break;
+            
+        case 'schedule_call':
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(10, 0, 0);
+            
+            url = `/custom-admin/inquiries/${inquiryId}/follow-up/`;
+            method = 'POST';
+            data = {
+                due_date: tomorrow.toISOString().slice(0, 16),
+                task: 'Schedule call with customer',
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            };
+            break;
+            
+        case 'convert_customer':
+            url = `/custom-admin/inquiries/${inquiryId}/update-status/`;
+            method = 'POST';
+            data = {
+                status: 'converted',
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            };
+            break;
+    }
+    
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+
+// Auto-save note on blur
+document.querySelectorAll('textarea[name="note"]').forEach(textarea => {
+    textarea.addEventListener('blur', function() {
+        if (this.value.trim()) {
+            this.form.submit();
+        }
+    });
+});
+</script>
+{% endblock %}

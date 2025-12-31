@@ -1,0 +1,701 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/contact-style.css' %}" />
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/contact-script.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <section class="contact-hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="page-badge fade-in-up">CONTACT US</div>
+          <h1 class="hero-title fade-in-up">Let's Build Something Extraordinary</h1>
+          <p class="hero-description fade-in-up">Ready to transform your enterprise? Our team of experts is here to understand your unique challenges and craft tailored solutions that drive real business impact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Cards -->
+  <section class="contact-cards">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="contact-card stagger-item">
+            <div class="contact-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>General Inquiries</h3>
+            <p>Have questions about our services or capabilities? Our team is ready to help.</p>
+            <div class="contact-info">
+              <p>
+                <i class="fas fa-phone"></i> <a href="tel:+11234567890">+1 (123) 456-7890</a>
+              </p>
+              <p>
+                <i class="fas fa-envelope"></i> <a href="mailto:hello@AI-Solution.com">hello@AI-Solution.com</a>
+              </p>
+              <p>
+                <i class="far fa-clock"></i> Mon-Fri: 9am-6pm EST
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="contact-card stagger-item">
+            <div class="contact-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <h3>Business Partnerships</h3>
+            <p>Interested in partnering with us? Let's explore opportunities together.</p>
+            <div class="contact-info">
+              <p>
+                <i class="fas fa-phone"></i> <a href="tel:+11234567891">+1 (123) 456-7891</a>
+              </p>
+              <p>
+                <i class="fas fa-envelope"></i> <a href="mailto:partners@AI-Solution.com">partners@AI-Solution.com</a>
+              </p>
+              <p>
+                <i class="far fa-calendar"></i> Schedule a meeting
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="contact-card stagger-item">
+            <div class="contact-icon">
+              <i class="fas fa-life-ring"></i>
+            </div>
+            <h3>Technical Support</h3>
+            <p>Need assistance with an existing implementation? Our support team is here 24/7.</p>
+            <div class="contact-info">
+              <p>
+                <i class="fas fa-phone"></i> <a href="tel:+11234567892">+1 (123) 456-7892</a>
+              </p>
+              <p>
+                <i class="fas fa-envelope"></i> <a href="mailto:support@AI-Solution.com">support@AI-Solution.com</a>
+              </p>
+              <p>
+                <i class="fas fa-shield-alt"></i> Priority support available
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  {% comment %} <section class="contact-form-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="form-container fade-in-up">
+            <div class="form-header">
+              <h2>Start Your Project</h2>
+              <p>Fill out the form below and our solutions architect will contact you within 24 hours to discuss your requirements.</p>
+              <div class="response-time">
+                <i class="fas fa-bolt"></i>
+                <span>Typically responds within 4 hours</span>
+              </div>
+            </div>
+
+            <div id="formSuccess" class="alert alert-success d-none"></div>
+            <div id="formError" class="alert alert-danger d-none"></div>
+            <form method="POST" action="{% url 'contact' %}" id="contactForm">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstName" class="form-label">First Name *</label>
+                    <input type="text" class="form-control" id="firstName" name="first_name" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name *</label>
+                    <input type="text" class="form-control" id="lastName" name="last_name" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email Address *</label>
+                    <input type="email" class="form-control" id="email" name="email" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number *</label>
+                    <input type="number" class="form-control" id="phone" name="phone" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="company" class="form-label">Company *</label>
+                    <input type="text" class="form-control" id="company" name="company" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="jobTitle" class="form-label">Job Title</label>
+                    <input type="text" class="form-control" id="jobTitle" name="job_title" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="country" class="form-label">Country *</label>
+                    <select name="country" class="form-select" id="country" required>
+                      <option value="">Select your country</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="United States">United States</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Germany">Germany</option>
+                      <option value="France">France</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Singapore">Singapore</option>
+                      <option value="India">India</option>
+                      <option value="China">China</option>
+                      <option value="Brazil">Brazil</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="industry" class="form-label">Industry *</label>
+                    <select name="industry" class="form-select" id="industry" required>
+                      <option value="">Select your industry</option>
+                      <option value="finance">Finance & Banking</option>
+                      <option value="healthcare">Healthcare</option>
+                      <option value="technology">Technology</option>
+                      <option value="retail">Retail & E-commerce</option>
+                      <option value="manufacturing">Manufacturing</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="service" class="form-label">Service Interested In *</label>
+                    <select class="form-select" name="service" id="service" required>
+                      <option value="">Select a service</option>
+                      <option value="ai">AI & Automation</option>
+                      <option value="data">Data Analytics</option>
+                      <option value="cloud">Cloud & DevOps</option>
+                      <option value="security">Cybersecurity</option>
+                      <option value="digital">Digital Transformation</option>
+                      <option value="custom">Custom Solution</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Project Details *</label>
+                <textarea class="form-control" id="message" rows="5" name="details" placeholder="Tell us about your project, challenges, timeline, and budget..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="privacy_policy" type="checkbox" id="privacyPolicy" required />
+                  <label class="form-check-label" for="privacyPolicy">I agree to AI-Solution's <a href="#" style="color: var(--teal-primary);">Privacy Policy</a> and consent to being contacted about my inquiry.</label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <span id="submitText">Submit Inquiry</span>
+                <div class="spinner-border spinner-border-sm text-light d-none" role="status" id="submitSpinner">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> {% endcomment %}
+
+  <!-- Contact Form Section -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="form-container fade-in-up">
+                    <div class="form-header">
+                        <h2>Start Your Project</h2>
+                        <p>Fill out the form below and our solutions architect will contact you within 24 hours to discuss your requirements.</p>
+                        <div class="response-time">
+                            <i class="fas fa-bolt"></i>
+                            <span>Typically responds within 4 hours</span>
+                        </div>
+                    </div>
+
+                    <form method="POST" action="{% url 'contact' %}" id="contactForm" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            
+<!-- First Name field (add validation) -->
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name *</label>
+        <input type="text" 
+               class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" 
+               id="{{ form.first_name.id_for_label }}" 
+               name="{{ form.first_name.name }}"
+               value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+               pattern="[A-Za-z\s]+"
+               title="First name should only contain letters and spaces"
+               required>
+        {% if form.first_name.errors %}
+        <div class="invalid-feedback">
+            {% for error in form.first_name.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Last Name field (add validation) -->
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}" class="form-label">Last Name *</label>
+        <input type="text" 
+               class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" 
+               id="{{ form.last_name.id_for_label }}" 
+               name="{{ form.last_name.name }}"
+               value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+               pattern="[A-Za-z\s]+"
+               title="Last name should only contain letters and spaces"
+               required>
+        {% if form.last_name.errors %}
+        <div class="invalid-feedback">
+            {% for error in form.last_name.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+                        </div>
+                        
+                        <div class="row">
+                           <!-- Email field -->
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="{{ form.email.id_for_label }}" class="form-label">Email Address *</label>
+        <input type="email" 
+               class="form-control {% if form.email.errors %}is-invalid{% endif %}" 
+               id="{{ form.email.id_for_label }}" 
+               name="{{ form.email.name }}"
+               value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+               pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+               title="Please enter a valid email address (e.g., name@example.com)"
+               required>
+        {% if form.email.errors %}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <small class="form-text text-muted">Example: name@company.com</small>
+    </div>
+</div>
+                            <div class="col-md-6">
+    <div class="form-group">
+        <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number *</label>
+        <input type="tel" 
+               class="form-control {% if form.phone.errors %}is-invalid{% endif %}" 
+               id="{{ form.phone.id_for_label }}" 
+               name="{{ form.phone.name }}"
+               value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
+               pattern="\+?[\d\s\-\(\)]+"
+               title="Phone number (e.g., +1 (123) 456-7890 or 1234567890)"
+               placeholder="+1 (123) 456-7890"
+               required>
+        {% if form.phone.errors %}
+        <div class="invalid-feedback">
+            {% for error in form.phone.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <small class="form-text text-muted">Format: +1 (123) 456-7890</small>
+    </div>
+</div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.company.id_for_label }}" class="form-label">Company *</label>
+                                    <input type="text" 
+                                           class="form-control {% if form.company.errors %}is-invalid{% endif %}" 
+                                           id="{{ form.company.id_for_label }}" 
+                                           name="{{ form.company.name }}"
+                                           value="{% if form.company.value %}{{ form.company.value }}{% endif %}"
+                                           required>
+                                    {% if form.company.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.company.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.job_title.id_for_label }}" class="form-label">Job Title</label>
+                                    <input type="text" 
+                                           class="form-control {% if form.job_title.errors %}is-invalid{% endif %}" 
+                                           id="{{ form.job_title.id_for_label }}" 
+                                           name="{{ form.job_title.name }}"
+                                           value="{% if form.job_title.value %}{{ form.job_title.value }}{% endif %}">
+                                    {% if form.job_title.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.job_title.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="{{ form.country.id_for_label }}" class="form-label">Country *</label>
+                                    <select name="{{ form.country.name }}" 
+                                            class="form-select {% if form.country.errors %}is-invalid{% endif %}" 
+                                            id="{{ form.country.id_for_label }}" 
+                                            required>
+                                        <option value="">Select your country</option>
+                                        <option value="United Kingdom" {% if form.country.value == "United Kingdom" %}selected{% endif %}>United Kingdom</option>
+                                        <option value="United States" {% if form.country.value == "United States" %}selected{% endif %}>United States</option>
+                                        <option value="Canada" {% if form.country.value == "Canada" %}selected{% endif %}>Canada</option>
+                                        <option value="Australia" {% if form.country.value == "Australia" %}selected{% endif %}>Australia</option>
+                                        <option value="Germany" {% if form.country.value == "Germany" %}selected{% endif %}>Germany</option>
+                                        <option value="France" {% if form.country.value == "France" %}selected{% endif %}>France</option>
+                                        <option value="Japan" {% if form.country.value == "Japan" %}selected{% endif %}>Japan</option>
+                                        <option value="Singapore" {% if form.country.value == "Singapore" %}selected{% endif %}>Singapore</option>
+                                        <option value="India" {% if form.country.value == "India" %}selected{% endif %}>India</option>
+                                        <option value="China" {% if form.country.value == "China" %}selected{% endif %}>China</option>
+                                        <option value="Brazil" {% if form.country.value == "Brazil" %}selected{% endif %}>Brazil</option>
+                                        <option value="South Africa" {% if form.country.value == "South Africa" %}selected{% endif %}>South Africa</option>
+                                        <option value="Other" {% if form.country.value == "Other" %}selected{% endif %}>Other</option>
+                                    </select>
+                                    {% if form.country.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.country.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.industry.id_for_label }}" class="form-label">Industry *</label>
+                                    <select name="{{ form.industry.name }}" 
+                                            class="form-select {% if form.industry.errors %}is-invalid{% endif %}" 
+                                            id="{{ form.industry.id_for_label }}" 
+                                            required>
+                                        <option value="">Select your industry</option>
+                                        <option value="finance" {% if form.industry.value == "finance" %}selected{% endif %}>Finance & Banking</option>
+                                        <option value="healthcare" {% if form.industry.value == "healthcare" %}selected{% endif %}>Healthcare</option>
+                                        <option value="technology" {% if form.industry.value == "technology" %}selected{% endif %}>Technology</option>
+                                        <option value="retail" {% if form.industry.value == "retail" %}selected{% endif %}>Retail & E-commerce</option>
+                                        <option value="manufacturing" {% if form.industry.value == "manufacturing" %}selected{% endif %}>Manufacturing</option>
+                                        <option value="other" {% if form.industry.value == "other" %}selected{% endif %}>Other</option>
+                                    </select>
+                                    {% if form.industry.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.industry.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.service.id_for_label }}" class="form-label">Service Interested In *</label>
+                                    <select class="form-select {% if form.service.errors %}is-invalid{% endif %}" 
+                                            name="{{ form.service.name }}" 
+                                            id="{{ form.service.id_for_label }}" 
+                                            required>
+                                        <option value="">Select a service</option>
+                                        <option value="ai" {% if form.service.value == "ai" %}selected{% endif %}>AI & Automation</option>
+                                        <option value="data" {% if form.service.value == "data" %}selected{% endif %}>Data Analytics</option>
+                                        <option value="cloud" {% if form.service.value == "cloud" %}selected{% endif %}>Cloud & DevOps</option>
+                                        <option value="security" {% if form.service.value == "security" %}selected{% endif %}>Cybersecurity</option>
+                                        <option value="digital" {% if form.service.value == "digital" %}selected{% endif %}>Digital Transformation</option>
+                                        <option value="custom" {% if form.service.value == "custom" %}selected{% endif %}>Custom Solution</option>
+                                    </select>
+                                    {% if form.service.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.service.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.details.id_for_label }}" class="form-label">Project Details *</label>
+                            <textarea class="form-control {% if form.details.errors %}is-invalid{% endif %}" 
+                                      id="{{ form.details.id_for_label }}"  rows="5" name="{{ form.details.name }}" placeholder="Tell us about your project, challenges, timeline, and budget..."
+                                      required>{% if form.details.value %}{{ form.details.value }}{% endif %}</textarea>
+                            {% if form.details.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.details.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input {% if form.privacy_policy.errors %}is-invalid{% endif %}" 
+                                       name="{{ form.privacy_policy.name }}" 
+                                       type="checkbox" 
+                                       id="{{ form.privacy_policy.id_for_label }}" 
+                                       required
+                                       {% if form.privacy_policy.value %}checked{% endif %}>
+                                <label class="form-check-label" for="{{ form.privacy_policy.id_for_label }}">
+                                    I agree to AI-Solution's <a href="#" style="color: var(--teal-primary);">Privacy Policy</a> and consent to being contacted about my inquiry.
+                                </label>
+                                {% if form.privacy_policy.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.privacy_policy.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <span id="submitText">Submit Inquiry</span>
+                            <div class="spinner-border spinner-border-sm text-light d-none" role="status" id="submitSpinner">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  <!-- Global Offices -->
+  <section id="global-offices">
+    <div class="container">
+      <h2 class="text-center mb-5 fade-in-up">Our Offices</h2>
+
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="office-card stagger-item">
+            <div class="office-header">
+              <div class="office-flag">🇬🇧</div>
+              <div class="office-hours">GMT 9am-6pm</div>
+            </div>
+            <h3>Sunderland</h3>
+            <p>Our UK technology and delivery hub, specializing in software engineering, AI solutions, and digital platforms.</p>
+
+            <div class="office-details">
+              <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <strong>Address</strong><br />
+                  123 Innovation Drive<br />
+                  Sunderland SR1 1AA, UK
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <strong>Phone</strong><br />
+                  +44 (0)191 234 5678
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="office-card stagger-item">
+            <div class="office-header">
+              <div class="office-flag">🇬🇧</div>
+              <div class="office-hours">GMT 9am-6pm</div>
+            </div>
+            <h3>Manchester</h3>
+            <p>Our UK innovation and scale-up hub, focusing on SaaS platforms, data engineering, and AI-driven products.</p>
+
+            <div class="office-details">
+              <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <strong>Address</strong><br />
+                  10 Technology Park<br />
+                  Manchester M1 1AE, UK
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <strong>Phone</strong><br />
+                  +44 (0)161 456 7890
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="office-card stagger-item">
+            <div class="office-header">
+              <div class="office-flag">🇬🇧</div>
+              <div class="office-hours">GMT 9am-6pm</div>
+            </div>
+            <h3>London</h3>
+            <p>Our UK headquarters focusing on fintech, enterprise software, and cybersecurity solutions.</p>
+
+            <div class="office-details">
+              <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <strong>Address</strong><br />
+                  45 Innovation Way<br />
+                  London EC2A 4NE, UK
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <strong>Phone</strong><br />
+                  +44 (0)20 7123 4567
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="faq-container fade-in-up">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+
+            <div class="faq-list">
+              <div class="faq-item">
+                <div class="faq-question">
+                  <h4>What is your typical response time for new inquiries?</h4>
+                  <div class="faq-toggle">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="faq-answer">
+                  <p>We pride ourselves on rapid response times. Our solutions architects typically respond within 4 hours during business hours, and always within 24 hours. For urgent matters, please call our main line and request priority assistance.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question">
+                  <h4>What information should I include in my project inquiry?</h4>
+                  <div class="faq-toggle">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="faq-answer">
+                  <p>To help us provide the most accurate proposal, please include: your business objectives, current challenges, timeline expectations, budget range, and any specific technical requirements. The more detail you provide, the better we can tailor our solution to your needs.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question">
+                  <h4>Do you offer free consultations?</h4>
+                  <div class="faq-toggle">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="faq-answer">
+                  <p>Yes, we offer complimentary initial consultations for all qualified enterprise inquiries. During this 60-minute session, our solutions architect will analyze your requirements and provide high-level recommendations. There's no obligation to proceed further.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question">
+                  <h4>What industries do you specialize in?</h4>
+                  <div class="faq-toggle">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="faq-answer">
+                  <p>We have deep expertise in finance & banking, healthcare, technology, retail & e-commerce, and manufacturing. However, we work with enterprises across all sectors. Our methodology is adaptable to any industry with complex digital transformation needs.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question">
+                  <h4>What is your typical project timeline?</h4>
+                  <div class="faq-toggle">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="faq-answer">
+                  <p>Project timelines vary based on complexity and scope. Simple implementations can take 4-8 weeks, while enterprise-scale digital transformations typically range from 6-18 months. After our initial consultation, we'll provide a detailed project roadmap with specific milestones.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h3>Thank You!</h3>
+      <p>Your inquiry has been submitted successfully. Our solutions architect will contact you within 24 hours to discuss your project requirements.</p>
+      <button class="btn-close-modal" id="closeSuccessModal">Return to Site</button>
+    </div>
+  </div>
+{% endblock %}
