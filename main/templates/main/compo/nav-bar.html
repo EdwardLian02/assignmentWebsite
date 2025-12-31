@@ -1,7 +1,7 @@
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">AI Solution</a>
+        <a class="navbar-brand" href="{% url 'index' %}">AI Solution</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,7 +28,7 @@
                 </li>
 
                 <li class="nav-item ms-3">
-                    <a class=" navbar-cta nav-link  {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" style="text-decoration: none; border-radius: 50px;" href="{% url 'contact' %}">Talk to Our Team</a>
+                    <a class=" navbar-cta nav-link" style="text-decoration: none; border-radius: 50px; background-color:#0d9488;" href="{% url 'contact' %}">Talk to Our Team</a>
                 </li>
             </ul>
         </div>
