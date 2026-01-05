@@ -7,19 +7,6 @@ from django.contrib.auth.models import User
 from main.models import ContactInquiry
 from django.utils import timezone
 
-class InquiryStats(models.Model):
-    date = models.DateField(unique=True)
-    total_inquiries = models.IntegerField(default=0)
-    new_inquiries = models.IntegerField(default=0)
-    inquiries_by_country = models.JSONField(default=dict)  # Store country-wise counts
-    inquiries_by_service = models.JSONField(default=dict)  # Store service-wise counts
-    
-    def __str__(self):
-        return f"Stats for {self.date}"
-    
-    class Meta:
-        verbose_name_plural = "Inquiry Statistics"
-
 # custom_admin/models.py
 
 
